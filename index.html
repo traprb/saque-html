@@ -1,153 +1,173 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Saque Aqui</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
     :root {
       --laranja: #e85a3d;
       --azul: #003366;
-      --creme: #fffaf0;
       --branco: #ffffff;
-      --sombra: 0 2px 8px rgba(0,0,0,0.1);
+      --preto: #121212;
+      --cinza: #f2f2f2;
+      --sombra: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    [data-tema="escuro"] {
+      --branco: #121212;
+      --cinza: #1e1e1e;
+      --azul: #ffffff;
     }
 
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-    }
-
-    html, body {
-      width: 100%;
-      overflow-x: hidden;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
 
     body {
       font-family: 'Arial', sans-serif;
-      background-color: #f2f2f2;
-      color: #333;
-      padding-bottom: 80px;
+      background-color: var(--cinza);
+      color: var(--azul);
+      min-height: 100vh;
+      overflow-x: hidden;
     }
 
     header {
       background-color: var(--laranja);
       color: var(--branco);
-      padding: 20px;
+      padding: 20px 15px;
       border-bottom-left-radius: 20px;
       border-bottom-right-radius: 20px;
-      text-align: left;
-      position: relative;
     }
 
-    header .top-bar {
+    .top-bar {
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
 
-    header .top-bar span {
+    .top-bar span {
+      font-size: 16px;
       display: flex;
       align-items: center;
-      font-size: 16px;
     }
 
-    header .top-bar span i {
+    .top-bar i {
       margin-right: 8px;
     }
 
-    header .top-bar .notification {
-      position: relative;
+    .theme-toggle {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background-color: var(--branco);
+      border: 2px solid var(--branco);
+      display: flex;
+      align-items: center;
+      justify-content: center;
       cursor: pointer;
+      transition: transform 0.4s ease;
     }
 
-    header .top-bar .notification::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 8px;
-      height: 8px;
-      background-color: red;
-      border-radius: 50%;
+    .theme-toggle:hover {
+      transform: rotate(15deg) scale(1.1);
+    }
+
+    .theme-toggle i {
+      color: var(--laranja);
+      font-size: 16px;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.2); opacity: 0.7; }
+      100% { transform: scale(1); opacity: 1; }
     }
 
     .carousel {
       margin-top: 15px;
       overflow: hidden;
-      white-space: nowrap;
-      animation: slide 25s linear infinite;
+      display: flex;
+      gap: 20px;
+      padding-bottom: 10px;
+      position: relative;
     }
 
     .carousel span {
-      display: inline-block;
-      margin-right: 40px;
+      flex: 0 0 auto;
       font-size: 14px;
+      white-space: nowrap;
+      background: rgba(255,255,255,0.2);
+      padding: 6px 12px;
+      border-radius: 12px;
+      color: var(--branco);
     }
 
-    @keyframes slide {
-      0% { transform: translateX(100%); }
-      100% { transform: translateX(-100%); }
+    .carousel-track {
+      display: flex;
+      gap: 20px;
+      will-change: transform;
     }
 
     .container {
-      padding: 20px 15px;
+      padding: 20px 15px 100px;
     }
 
-    .card-principal {
+    .destaque {
       background-color: var(--branco);
-      padding: 20px;
-      border-radius: 15px;
-      margin-bottom: 20px;
+      border-left: 6px solid var(--laranja);
+      border-radius: 10px;
+      padding: 15px;
       box-shadow: var(--sombra);
-    }
-
-    .card-principal i {
-      color: var(--azul);
-      font-size: 22px;
-      margin-bottom: 10px;
-    }
-
-    .card-principal h3 {
-      font-size: 16px;
-      margin-bottom: 10px;
+      margin-bottom: 20px;
+      font-size: 15px;
+      line-height: 1.5;
     }
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
       gap: 12px;
     }
 
     .card {
-      background-color: var(--creme);
-      padding: 14px;
+      background-color: var(--branco);
       border-radius: 15px;
       box-shadow: var(--sombra);
       text-align: center;
+      padding: 16px;
+      text-decoration: none;
+      color: var(--azul);
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       aspect-ratio: 1 / 1;
+      transition: transform 0.2s;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
     }
 
     .card i {
-      font-size: 24px;
-      margin-bottom: 8px;
-      color: var(--azul);
+      font-size: 26px;
+      margin-bottom: 10px;
     }
 
-    .card span {
-      font-size: 14px;
-      color: var(--azul);
-    }
-
-    .card a {
-      text-decoration: none;
-      color: inherit;
+    .assistente-btn {
+      background-color: var(--laranja);
+      color: white;
+      padding: 14px;
+      border-radius: 12px;
+      text-align: center;
+      margin-top: 30px;
+      cursor: pointer;
     }
 
     .menu-inferior {
@@ -159,8 +179,8 @@
       display: flex;
       justify-content: space-around;
       border-top: 1px solid #ccc;
-      padding: 8px 0;
-      z-index: 10;
+      padding: 10px 0;
+      z-index: 1000;
     }
 
     .menu-inferior div {
@@ -172,16 +192,6 @@
     .menu-inferior i {
       font-size: 18px;
       margin-bottom: 4px;
-    }
-
-    .assistente-btn {
-      background-color: var(--laranja);
-      color: white;
-      padding: 12px;
-      border-radius: 10px;
-      text-align: center;
-      cursor: pointer;
-      margin-top: 30px;
     }
 
     .popup {
@@ -230,7 +240,7 @@
     }
   </style>
 </head>
-<body>
+<body data-tema="claro">
   <div id="popup" class="popup" style="display: none;">
     <div class="popup-content">
       <h3>Política de Privacidade</h3>
@@ -245,76 +255,47 @@
   <header>
     <div class="top-bar">
       <span><i class="fas fa-user"></i> Saque Aqui</span>
-      <div class="notification" onclick="window.location.href='mailto:fgtsonline.gov@gmail.com?subject=Consulta FGTS&body=Tenho valores disponíveis de FGTS'">
-        <i class="fas fa-bell"></i>
+      <div class="theme-toggle" onclick="alternarTema()" title="Alternar tema">
+        <i class="fas fa-moon" id="iconeTema"></i>
       </div>
     </div>
     <div class="carousel">
-      <span>Saque FGTS</span>
-      <span>Saque INSS</span>
-      <span>Saque do cartão de crédito</span>
-      <span>Vídeo de autorização</span>
-      <span>Bolsa Família</span>
-      <span>Compartilhe o aplicativo com quem precisa</span>
+      <div class="carousel-track" id="carouselTrack">
+        <span>Saque FGTS</span>
+        <span>Saque INSS</span>
+        <span>Saque do cartão de crédito</span>
+        <span>Vídeo de autorização</span>
+        <span>Bolsa Família</span>
+        <span>Compartilhe o aplicativo com quem precisa</span>
+      </div>
     </div>
   </header>
 
   <div class="container">
-    <div class="card-principal">
-      <i class="fas fa-exclamation-circle"></i>
-      <h3>Falta pouco, verifique em seu aplicativo FGTS e autorize as instituições financeiras a consultar seu saldo para saques</h3>
-      <p><strong>Financeiras:</strong></p>
-      <p>1: Giro sociedade de crédito</p>
-      <p>2: YU3 sociedade de crédito</p>
+    <div class="destaque">
+      <strong>Falta pouco!</strong><br>
+      Verifique no seu aplicativo FGTS e autorize as instituições financeiras abaixo:<br>
+      <strong>1:</strong> Giro Sociedade de Crédito<br>
+      <strong>2:</strong> YU3 Sociedade de Crédito
     </div>
 
     <div class="grid">
-      <a href="https://forms.gle/7Bs2DYANFbMaASEe9" class="card">
-        <i class="fas fa-hand-holding-usd"></i>
-        <span>Saque FGTS</span>
-      </a>
-      <a href="https://forms.gle/4VguNYKX4KfBzVJN7" class="card">
-        <i class="fas fa-university"></i>
-        <span>Saque INSS</span>
-      </a>
-      <a href="https://forms.gle/12yJmH5xCsZ9c2398" class="card">
-        <i class="fas fa-credit-card"></i>
-        <span>Saque do cartão de crédito</span>
-      </a>
-      <a href="https://youtu.be/bzKhuwaIqjI?feature=shared" class="card">
-        <i class="fas fa-video"></i>
-        <span>Vídeo de autorização</span>
-      </a>
-      <a href="https://forms.gle/ZR54WYRQWpCkDo7t8" class="card">
-        <i class="fas fa-users"></i>
-        <span>Bolsa Família</span>
-      </a>
-      <a href="https://play.google.com/store/apps/details?id=com.sistema.br" class="card">
-        <i class="fas fa-share-alt"></i>
-        <span>Compartilhe o aplicativo com quem precisa</span>
-      </a>
+      <a href="https://forms.gle/7Bs2DYANFbMaASEe9" class="card"><i class="fas fa-hand-holding-usd"></i><span>Saque FGTS</span></a>
+      <a href="https://forms.gle/4VguNYKX4KfBzVJN7" class="card"><i class="fas fa-university"></i><span>Saque INSS</span></a>
+      <a href="https://forms.gle/12yJmH5xCsZ9c2398" class="card"><i class="fas fa-credit-card"></i><span>Saque do cartão de crédito</span></a>
+      <a href="https://youtu.be/bzKhuwaIqjI?feature=shared" class="card"><i class="fas fa-video"></i><span>Vídeo de autorização</span></a>
+      <a href="https://forms.gle/ZR54WYRQWpCkDo7t8" class="card"><i class="fas fa-users"></i><span>Bolsa Família</span></a>
+      <a href="https://play.google.com/store/apps/details?id=com.sistema.br" class="card"><i class="fas fa-share-alt"></i><span>Compartilhe o aplicativo</span></a>
     </div>
 
     <div class="assistente-btn" onclick="abrirAssistente()">Assistente virtual de suporte</div>
   </div>
 
   <div class="menu-inferior">
-    <div onclick="location.reload()">
-      <i class="fas fa-home"></i>
-      <div>Principal</div>
-    </div>
-    <div onclick="window.open('https://youtu.be/imKR9uWGZn0?si=HlW3WMv9OwatnmRW', '_blank')">
-      <i class="fas fa-video"></i>
-      <div>Optar ao saque</div>
-    </div>
-    <div onclick="window.open('https://wa.me/5511978311920?text=Olá, preciso de suporte com meu FGTS.', '_blank')">
-      <i class="fas fa-headset"></i>
-      <div>Suporte</div>
-    </div>
-    <div onclick="window.open('https://www.saqueaqui.online/saque-aniversario-do-fgts-saque-aqui', '_blank')">
-      <i class="fas fa-globe"></i>
-      <div>Site</div>
-    </div>
+    <div onclick="location.reload()"><i class="fas fa-home"></i><div>Principal</div></div>
+    <div onclick="window.open('https://youtu.be/imKR9uWGZn0?si=HlW3WMv9OwatnmRW', '_blank')"><i class="fas fa-video"></i><div>Optar ao saque</div></div>
+    <div onclick="window.open('https://wa.me/5511978311920?text=Olá, preciso de suporte com meu FGTS.', '_blank')"><i class="fas fa-headset"></i><div>Suporte</div></div>
+    <div onclick="window.open('https://www.saqueaqui.online/saque-aniversario-do-fgts-saque-aqui', '_blank')"><i class="fas fa-globe"></i><div>Site</div></div>
   </div>
 
   <script>
@@ -332,13 +313,35 @@
       alert("Você precisa aceitar a política de privacidade para continuar usando o app.");
     }
 
-    window.onload = function () {
+    function alternarTema() {
+      const body = document.body;
+      const temaAtual = body.getAttribute('data-tema');
+      const novoTema = temaAtual === 'claro' ? 'escuro' : 'claro';
+      body.setAttribute('data-tema', novoTema);
+      const icone = document.getElementById('iconeTema');
+      icone.className = novoTema === 'escuro' ? 'fas fa-sun' : 'fas fa-moon';
+    }
+
+    let scrollPos = 0;
+    function animarCarrossel() {
+      const track = document.getElementById('carouselTrack');
+      if (track) {
+        scrollPos += 0.5;
+        if (scrollPos >= track.scrollWidth) scrollPos = 0;
+        track.style.transform = `translateX(-${scrollPos}px)`;
+        requestAnimationFrame(animarCarrossel);
+      }
+    }
+
+    window.onload = () => {
       const ultimaAceitacao = localStorage.getItem('politicaAceita');
-      const agora = new Date();
-      if (!ultimaAceitacao || (new Date(ultimaAceitacao).getDate() !== agora.getDate())) {
+      const hoje = new Date();
+      if (!ultimaAceitacao || new Date(ultimaAceitacao).getDate() !== hoje.getDate()) {
         document.getElementById('popup').style.display = 'flex';
       }
+      animarCarrossel();
     };
   </script>
 </body>
-</html>
+      </html>
+                                                
