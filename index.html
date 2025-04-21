@@ -275,17 +275,17 @@
     <div class="destaque">
       <strong>Falta pouco!</strong><br>
       Verifique no seu aplicativo FGTS e autorize as instituições financeiras abaixo:<br>
-      <strong>1:</strong> Giro Sociedade de Crédito<br>
-      <strong>2:</strong> YU3 Sociedade de Crédito
+      <strong>1:</strong> J17 Sociedade de Crédito<br>
+      <strong>2:</strong> Giro Sociedade de Crédito
     </div>
 
     <div class="grid">
       <a href="https://forms.gle/7Bs2DYANFbMaASEe9" class="card"><i class="fas fa-hand-holding-usd"></i><span>Saque FGTS</span></a>
       <a href="https://forms.gle/4VguNYKX4KfBzVJN7" class="card"><i class="fas fa-university"></i><span>Saque INSS</span></a>
       <a href="https://forms.gle/12yJmH5xCsZ9c2398" class="card"><i class="fas fa-credit-card"></i><span>Saque do cartão de crédito</span></a>
-      <a href="https://youtu.be/bzKhuwaIqjI?feature=shared" class="card"><i class="fas fa-video"></i><span>Vídeo de autorização</span></a>
+      <a href="https://www.saqueaqui.online/autoriza%C3%A7%C3%A3o-de-institui%C3%A7%C3%B5es-saque-fgts" class="card"><i class="fas fa-video"></i><span>Vídeo de autorização</span></a>
       <a href="https://forms.gle/ZR54WYRQWpCkDo7t8" class="card"><i class="fas fa-users"></i><span>Bolsa Família</span></a>
-      <a href="https://play.google.com/store/apps/details?id=com.sistema.br" class="card"><i class="fas fa-share-alt"></i><span>Compartilhe o aplicativo</span></a>
+      <a href="#" class="card" onclick="compartilharApp()"><i class="fas fa-share-alt"></i><span>Compartilhe o aplicativo</span></a>
     </div>
 
     <div class="assistente-btn" onclick="abrirAssistente()">Assistente virtual de suporte</div>
@@ -293,14 +293,14 @@
 
   <div class="menu-inferior">
     <div onclick="location.reload()"><i class="fas fa-home"></i><div>Principal</div></div>
-    <div onclick="window.open('https://youtu.be/imKR9uWGZn0?si=HlW3WMv9OwatnmRW', '_blank')"><i class="fas fa-video"></i><div>Optar ao saque</div></div>
-    <div onclick="window.open('https://wa.me/5511978311920?text=Olá, preciso de suporte com meu FGTS.', '_blank')"><i class="fas fa-headset"></i><div>Suporte</div></div>
+    <div onclick="window.open('https://www.saqueaqui.online/antecipa%C3%A7%C3%A3o-saque-aniversario-fgts-saque-aqui', '_blank')"><i class="fas fa-video"></i><div>Optar ao saque</div></div>
+    <div onclick="window.location.href='mailto:fgtsonline.gov@gmail.com'"><i class="fas fa-headset"></i><div>Suporte</div></div>
     <div onclick="window.open('https://www.saqueaqui.online/saque-aniversario-do-fgts-saque-aqui', '_blank')"><i class="fas fa-globe"></i><div>Site</div></div>
   </div>
 
   <script>
     function abrirAssistente() {
-      alert("Para realizar seu saque, siga estes passos:\n1. Acesse o aplicativo FGTS.\n2. Autorize as instituições financeiras: Giro e YU3 sociedade de crédito.\n3. Volte aqui e clique em 'Saque FGTS'.");
+      alert("Para realizar seu saque, siga estes passos:\n1. Acesse o aplicativo FGTS.\n2. Autorize as instituições financeiras: J17 e Giro sociedade de crédito.\n3. Volte aqui e clique em 'Saque FGTS'.");
     }
 
     function aceitarPolitica() {
@@ -320,6 +320,15 @@
       body.setAttribute('data-tema', novoTema);
       const icone = document.getElementById('iconeTema');
       icone.className = novoTema === 'escuro' ? 'fas fa-sun' : 'fas fa-moon';
+    }
+
+    function compartilharApp() {
+      const mensagem = "Baixe o aplicativo Saque Aqui e antecipe seu FGTS com segurança! Acesse: https://play.google.com/store/apps/details?id=com.sistema.br";
+      if (navigator.share) {
+        navigator.share({ text: mensagem });
+      } else {
+        prompt("Copie e compartilhe esta mensagem:", mensagem);
+      }
     }
 
     let scrollPos = 0;
@@ -343,5 +352,4 @@
     };
   </script>
 </body>
-      </html>
-                                                
+        </html>
