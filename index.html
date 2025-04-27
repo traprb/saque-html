@@ -4,44 +4,50 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Saque Aqui</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="all" />
   <style>
     :root {
-      --laranja: #e85a3d;
-      --azul: #003366;
-      --branco: #ffffff;
-      --preto: #121212;
-      --cinza: #f2f2f2;
-      --sombra: 0 4px 12px rgba(0,0,0,0.1);
+      --primary: #e85a3d;
+      --background-light: #f9f9f9;
+      --background-dark: #121212;
+      --card-light: #ffffff;
+      --card-dark: #1e1e1e;
+      --text-light: #121212;
+      --text-dark: #ffffff;
+      --border-radius: 16px;
+      --sombra: 0 2px 10px rgba(0, 0, 0, 0.15);
     }
 
     [data-tema="escuro"] {
-      --branco: #121212;
-      --cinza: #1e1e1e;
-      --azul: #ffffff;
+      --background-light: var(--background-dark);
+      --card-light: var(--card-dark);
+      --text-light: var(--text-dark);
     }
 
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      transition: background-color 0.3s ease, color 0.3s ease;
+      transition: background-color 0.3s, color 0.3s;
+      font-family: 'Arial', sans-serif;
     }
 
     body {
-      font-family: 'Arial', sans-serif;
-      background-color: var(--cinza);
-      color: var(--azul);
+      background-color: var(--background-light);
+      color: var(--text-light);
       min-height: 100vh;
       overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
     }
 
     header {
-      background-color: var(--laranja);
-      color: var(--branco);
+      background-color: var(--primary);
+      color: var(--text-dark);
       padding: 20px 15px;
-      border-bottom-left-radius: 20px;
-      border-bottom-right-radius: 20px;
+      border-bottom-left-radius: var(--border-radius);
+      border-bottom-right-radius: var(--border-radius);
+      box-shadow: var(--sombra);
     }
 
     .top-bar {
@@ -51,9 +57,10 @@
     }
 
     .top-bar span {
-      font-size: 16px;
+      font-size: 18px;
       display: flex;
       align-items: center;
+      font-weight: bold;
     }
 
     .top-bar i {
@@ -61,68 +68,55 @@
     }
 
     .theme-toggle {
-      width: 30px;
-      height: 30px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
-      background-color: var(--branco);
-      border: 2px solid var(--branco);
+      background-color: var(--card-light);
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      transition: transform 0.4s ease;
-    }
-
-    .theme-toggle:hover {
-      transform: rotate(15deg) scale(1.1);
+      box-shadow: var(--sombra);
     }
 
     .theme-toggle i {
-      color: var(--laranja);
-      font-size: 16px;
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.2); opacity: 0.7; }
-      100% { transform: scale(1); opacity: 1; }
+      color: var(--primary);
+      font-size: 18px;
     }
 
     .carousel {
       margin-top: 15px;
       overflow: hidden;
-      display: flex;
-      gap: 20px;
       padding-bottom: 10px;
-      position: relative;
+    }
+
+    .carousel-track {
+      display: flex;
+      gap: 16px;
+      will-change: transform;
+      padding: 10px;
     }
 
     .carousel span {
       flex: 0 0 auto;
       font-size: 14px;
+      padding: 8px 14px;
+      background: rgba(255,255,255,0.25);
+      border-radius: 20px;
+      color: var(--text-dark);
       white-space: nowrap;
-      background: rgba(255,255,255,0.2);
-      padding: 6px 12px;
-      border-radius: 12px;
-      color: var(--branco);
-    }
-
-    .carousel-track {
-      display: flex;
-      gap: 20px;
-      will-change: transform;
     }
 
     .container {
-      padding: 20px 15px 100px;
+      flex: 1;
+      padding: 20px 15px 90px;
     }
 
     .destaque {
-      background-color: var(--branco);
-      border-left: 6px solid var(--laranja);
-      border-radius: 10px;
+      background: var(--card-light);
+      border-left: 5px solid var(--primary);
       padding: 15px;
+      border-radius: var(--border-radius);
       box-shadow: var(--sombra);
       margin-bottom: 20px;
       font-size: 15px;
@@ -131,24 +125,23 @@
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 12px;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 16px;
     }
 
     .card {
-      background-color: var(--branco);
-      border-radius: 15px;
-      box-shadow: var(--sombra);
+      background: var(--card-light);
+      border-radius: var(--border-radius);
+      padding: 20px 10px;
       text-align: center;
-      padding: 16px;
       text-decoration: none;
-      color: var(--azul);
+      color: var(--text-light);
+      box-shadow: var(--sombra);
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      aspect-ratio: 1 / 1;
-      transition: transform 0.2s;
+      transition: transform 0.2s ease;
     }
 
     .card:hover {
@@ -156,41 +149,42 @@
     }
 
     .card i {
-      font-size: 26px;
+      font-size: 28px;
       margin-bottom: 10px;
+      color: var(--primary);
     }
 
     .assistente-btn {
-      background-color: var(--laranja);
-      color: white;
+      margin-top: 25px;
+      background-color: var(--primary);
+      color: var(--text-dark);
       padding: 14px;
-      border-radius: 12px;
       text-align: center;
-      margin-top: 30px;
+      border-radius: var(--border-radius);
+      font-weight: bold;
       cursor: pointer;
+      box-shadow: var(--sombra);
     }
 
     .menu-inferior {
       position: fixed;
       bottom: 0;
-      left: 0;
-      right: 0;
-      background-color: var(--branco);
+      width: 100%;
+      background: var(--card-light);
       display: flex;
       justify-content: space-around;
-      border-top: 1px solid #ccc;
       padding: 10px 0;
-      z-index: 1000;
+      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
     }
 
     .menu-inferior div {
       text-align: center;
+      color: var(--primary);
       font-size: 12px;
-      color: var(--laranja);
     }
 
     .menu-inferior i {
-      font-size: 18px;
+      font-size: 20px;
       margin-bottom: 4px;
     }
 
@@ -198,8 +192,8 @@
       position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
+      right: 0;
+      bottom: 0;
       background: rgba(0, 0, 0, 0.6);
       display: flex;
       align-items: center;
@@ -208,148 +202,153 @@
     }
 
     .popup-content {
-      background: white;
+      background: var(--card-light);
       padding: 20px;
-      border-radius: 12px;
+      border-radius: var(--border-radius);
       width: 90%;
       max-width: 400px;
       text-align: center;
     }
 
     .popup-buttons {
-      margin-top: 20px;
       display: flex;
-      justify-content: space-around;
+      justify-content: space-between;
+      margin-top: 20px;
     }
 
     .popup-buttons button {
-      padding: 10px 20px;
+      flex: 1;
+      margin: 0 5px;
+      padding: 10px 0;
       border: none;
-      border-radius: 8px;
+      border-radius: var(--border-radius);
       cursor: pointer;
+      font-weight: bold;
     }
 
     .accept {
-      background-color: var(--laranja);
+      background-color: var(--primary);
       color: white;
     }
 
     .decline {
-      background-color: gray;
+      background-color: #888;
       color: white;
+    }
+
+    /* Exibir o botão de compartilhamento apenas em celulares */
+    @media (min-width: 768px) {
+      .compartilhar-mobile {
+        display: none !important;
+      }
     }
   </style>
 </head>
 <body data-tema="claro">
-  <div id="popup" class="popup" style="display: none;">
-    <div class="popup-content">
-      <h3>Política de Privacidade</h3>
-      <p>Leia nossa <a href="https://www.saqueaqui.online/politica-de-privacidade-saque-fgts" target="_blank">política de privacidade</a> antes de continuar usando o aplicativo.</p>
-      <div class="popup-buttons">
-        <button class="accept" onclick="aceitarPolitica()">Aceitar</button>
-        <button class="decline" onclick="rejeitarPolitica()">Rejeitar</button>
-      </div>
+
+<div id="popup" class="popup" style="display:none;">
+  <div class="popup-content">
+    <h3>Política de Privacidade</h3>
+    <p>Leia nossa <a href="https://www.saqueaqui.online/politica-de-privacidade-saque-fgts" target="_blank">política de privacidade</a> antes de continuar usando o aplicativo.</p>
+    <div class="popup-buttons">
+      <button class="accept" onclick="aceitarPolitica()">Aceitar</button>
+      <button class="decline" onclick="rejeitarPolitica()">Recusar</button>
     </div>
   </div>
+</div>
 
-  <header>
-    <div class="top-bar">
-      <span><i class="fas fa-user"></i> Saque Aqui</span>
-      <div class="theme-toggle" onclick="alternarTema()" title="Alternar tema">
-        <i class="fas fa-moon" id="iconeTema"></i>
-      </div>
+<header>
+  <div class="top-bar">
+    <span><i class="fas fa-user"></i> Saque Aqui</span>
+    <div class="theme-toggle" onclick="alternarTema()" title="Alternar tema">
+      <i class="fas fa-moon" id="iconeTema"></i>
     </div>
-    <div class="carousel">
-      <div class="carousel-track" id="carouselTrack">
-        <span>Saque FGTS</span>
-        <span>Saque INSS</span>
-        <span>Saque do cartão de crédito</span>
-        <span>Vídeo de autorização</span>
-        <span>Bolsa Família</span>
-        <span>Compartilhe o aplicativo com quem precisa</span>
-      </div>
+  </div>
+  <div class="carousel">
+    <div class="carousel-track" id="carouselTrack">
+      <span>Saque FGTS</span>
+      <span>Saque INSS</span>
+      <span>Cartão de Crédito</span>
+      <span>Vídeo de Autorização</span>
+      <span>Bolsa Família</span>
+      <span>Compartilhe</span>
     </div>
-  </header>
+  </div>
+</header>
 
-  <div class="container">
-    <div class="destaque">
-      <strong>Falta pouco!</strong><br>
-      Verifique no seu aplicativo FGTS e autorize as instituições financeiras abaixo:<br>
-      <strong>1:</strong> J17 Sociedade de Crédito<br>
-      <strong>2:</strong> Giro Sociedade de Crédito
-    </div>
-
-    <div class="grid">
-      <a href="https://forms.gle/7Bs2DYANFbMaASEe9" class="card"><i class="fas fa-hand-holding-usd"></i><span>Saque FGTS</span></a>
-      <a href="https://forms.gle/4VguNYKX4KfBzVJN7" class="card"><i class="fas fa-university"></i><span>Saque INSS</span></a>
-      <a href="https://forms.gle/12yJmH5xCsZ9c2398" class="card"><i class="fas fa-credit-card"></i><span>Saque do cartão de crédito</span></a>
-      <a href="https://www.saqueaqui.online/autoriza%C3%A7%C3%A3o-de-institui%C3%A7%C3%B5es-saque-fgts" class="card"><i class="fas fa-video"></i><span>Vídeo de autorização</span></a>
-      <a href="https://forms.gle/ZR54WYRQWpCkDo7t8" class="card"><i class="fas fa-users"></i><span>Bolsa Família</span></a>
-      <a href="#" class="card" onclick="compartilharApp()"><i class="fas fa-share-alt"></i><span>Compartilhe o aplicativo</span></a>
-    </div>
-
-    <div class="assistente-btn" onclick="abrirAssistente()">Assistente virtual de suporte</div>
+<div class="container">
+  <div class="destaque">
+    <strong>Falta pouco!</strong><br>
+    Verifique no seu aplicativo FGTS e autorize:<br>
+    <strong>1:</strong> J17 Sociedade de Crédito<br>
+    <strong>2:</strong> Giro Sociedade de Crédito
   </div>
 
-  <div class="menu-inferior">
-    <div onclick="location.reload()"><i class="fas fa-home"></i><div>Principal</div></div>
-    <div onclick="window.open('https://www.saqueaqui.online/antecipa%C3%A7%C3%A3o-saque-aniversario-fgts-saque-aqui', '_blank')"><i class="fas fa-video"></i><div>Optar ao saque</div></div>
-    <div onclick="window.location.href='mailto:fgtsonline.gov@gmail.com'"><i class="fas fa-headset"></i><div>Suporte</div></div>
-    <div onclick="window.open('https://www.saqueaqui.online/saque-aniversario-do-fgts-saque-aqui', '_blank')"><i class="fas fa-globe"></i><div>Site</div></div>
+  <div class="grid">
+    <a href="https://forms.gle/7Bs2DYANFbMaASEe9" class="card"><i class="fas fa-hand-holding-usd"></i><span>Saque FGTS</span></a>
+    <a href="https://forms.gle/4VguNYKX4KfBzVJN7" class="card"><i class="fas fa-university"></i><span>Saque INSS</span></a>
+    <a href="https://forms.gle/12yJmH5xCsZ9c2398" class="card"><i class="fas fa-credit-card"></i><span>Cartão Crédito</span></a>
+    <a href="https://www.saqueaqui.online/autoriza%C3%A7%C3%A3o-de-institui%C3%A7%C3%B5es-saque-fgts" class="card"><i class="fas fa-video"></i><span>Vídeo Autorização</span></a>
+    <a href="https://forms.gle/ZR54WYRQWpCkDo7t8" class="card"><i class="fas fa-users"></i><span>Bolsa Família</span></a>
+    <a href="https://api.whatsapp.com/send?text=Confira%20o%20app%20Saque%20Aqui!%20Rápido%20e%20fácil%20para%20adiantar%20seu%20FGTS.%20Baixe%20aqui:%20https://play.google.com/store/apps/details?id=com.sistema.br" class="card compartilhar-mobile" target="_blank"><i class="fas fa-share-alt"></i><span>Compartilhar App</span></a>
   </div>
 
-  <script>
-    function abrirAssistente() {
-      alert("Para realizar seu saque, siga estes passos:\n1. Acesse o aplicativo FGTS.\n2. Autorize as instituições financeiras: J17 e Giro sociedade de crédito.\n3. Volte aqui e clique em 'Saque FGTS'.");
-    }
+  <div class="assistente-btn" onclick="abrirAssistente()">Assistente Virtual</div>
+</div>
 
-    function aceitarPolitica() {
-      document.getElementById('popup').style.display = 'none';
-      const agora = new Date();
-      localStorage.setItem('politicaAceita', agora.toISOString());
-    }
+<div class="menu-inferior">
+  <div onclick="location.reload()"><i class="fas fa-home"></i><div>Início</div></div>
+  <div onclick="window.open('https://www.saqueaqui.online/antecipa%C3%A7%C3%A3o-saque-aniversario-fgts-saque-aqui', '_blank')"><i class="fas fa-calendar"></i><div>Optar</div></div>
+  <div onclick="window.location.href='mailto:fgtsonline.gov@gmail.com'"><i class="fas fa-headset"></i><div>Suporte</div></div>
+  <div onclick="window.open('https://www.saqueaqui.online/saque-aniversario-do-fgts-saque-aqui', '_blank')"><i class="fas fa-globe"></i><div>Site</div></div>
+</div>
 
-    function rejeitarPolitica() {
-      alert("Você precisa aceitar a política de privacidade para continuar usando o app.");
-    }
+<script>
+function abrirAssistente() {
+  alert("Para realizar seu saque:\n1. Autorize no app FGTS\n2. Autorize instituições J17 e Giro\n3. Clique em Saque FGTS.");
+}
 
-    function alternarTema() {
-      const body = document.body;
-      const temaAtual = body.getAttribute('data-tema');
-      const novoTema = temaAtual === 'claro' ? 'escuro' : 'claro';
-      body.setAttribute('data-tema', novoTema);
-      const icone = document.getElementById('iconeTema');
-      icone.className = novoTema === 'escuro' ? 'fas fa-sun' : 'fas fa-moon';
-    }
+function aceitarPolitica() {
+  document.getElementById('popup').style.display = 'none';
+  const agora = new Date().getTime();
+  localStorage.setItem('politicaAceita', agora);
+}
 
-    function compartilharApp() {
-      const mensagem = "Baixe o aplicativo Saque Aqui e antecipe seu FGTS com segurança! Acesse: https://play.google.com/store/apps/details?id=com.sistema.br";
-      if (navigator.share) {
-        navigator.share({ text: mensagem });
-      } else {
-        prompt("Copie e compartilhe esta mensagem:", mensagem);
-      }
-    }
+function rejeitarPolitica() {
+  alert("Você precisa aceitar a política de privacidade para usar o app.");
+}
 
-    let scrollPos = 0;
-    function animarCarrossel() {
-      const track = document.getElementById('carouselTrack');
-      if (track) {
-        scrollPos += 0.5;
-        if (scrollPos >= track.scrollWidth) scrollPos = 0;
-        track.style.transform = `translateX(-${scrollPos}px)`;
-        requestAnimationFrame(animarCarrossel);
-      }
-    }
+function alternarTema() {
+  const body = document.body;
+  const atual = body.getAttribute('data-tema');
+  const novo = atual === 'claro' ? 'escuro' : 'claro';
+  body.setAttribute('data-tema', novo);
+  document.getElementById('iconeTema').className = novo === 'escuro' ? 'fas fa-sun' : 'fas fa-moon';
+}
 
-    window.onload = () => {
-      const ultimaAceitacao = localStorage.getItem('politicaAceita');
-      const hoje = new Date();
-      if (!ultimaAceitacao || new Date(ultimaAceitacao).getDate() !== hoje.getDate()) {
-        document.getElementById('popup').style.display = 'flex';
-      }
-      animarCarrossel();
-    };
-  </script>
+let scroll = 0;
+function animarCarrossel() {
+  const track = document.getElementById('carouselTrack');
+  if (track) {
+    scroll += 0.5;
+    if (scroll >= track.scrollWidth) scroll = 0;
+    track.style.transform = `translateX(-${scroll}px)`;
+    requestAnimationFrame(animarCarrossel);
+  }
+}
+
+window.onload = () => {
+  const politicaAceita = localStorage.getItem('politicaAceita');
+  const agora = new Date().getTime();
+  const umDia = 24 * 60 * 60 * 1000;
+
+  if (!politicaAceita || (agora - politicaAceita) > umDia) {
+    document.getElementById('popup').style.display = 'flex';
+  }
+
+  animarCarrossel();
+};
+</script>
+
 </body>
-        </html>
+  </html>
