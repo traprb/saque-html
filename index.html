@@ -39,9 +39,12 @@
       overflow-x: hidden;
       display: flex;
       flex-direction: column;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
     }
 
-    /* Estilo do Loader */
     #loader {
       position: fixed;
       top: 0;
@@ -264,14 +267,6 @@
       color: white;
     }
 
-    /* Prevenção de Print Screen */
-    body {
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-    }
-
     @media (min-width: 768px) {
       .compartilhar-mobile {
         display: none !important;
@@ -281,12 +276,10 @@
 </head>
 <body data-tema="claro">
 
-  <!-- Loader -->
   <div id="loader" class="loader">
     <div class="loader-spinner"></div>
   </div>
 
-  <!-- Popup Política de Privacidade -->
   <div id="popup" class="popup" style="display:none;">
     <div class="popup-content">
       <h3>Política de Privacidade</h3>
@@ -298,7 +291,6 @@
     </div>
   </div>
 
-  <!-- Cabeçalho -->
   <header>
     <div class="top-bar">
       <span><i class="fas fa-user"></i> Saque Aqui</span>
@@ -308,48 +300,65 @@
     </div>
     <div class="carousel">
       <div class="carousel-track" id="carouselTrack">
-        <span>Saque FGTS</span>
-        <span>Saque INSS</span>
-        <span>Cartão de Crédito</span>
-        <span>Vídeo de Autorização</span>
-        <span>Bolsa Família</span>
-        <span>Compartilhe</span>
+        <span>Antecipe Saque</span>
+        <span>Vídeo Explicativo</span>
+        <span>Sobre Nós</span>
+        <span>Vídeo Autorização</span>
+        <span>Política de Privacidade</span>
+        <span>Compartilhar App</span>
       </div>
     </div>
   </header>
 
-  <!-- Conteúdo -->
   <div class="container">
     <div class="destaque">
       <strong>Falta pouco!</strong><br>
-      Verifique no seu aplicativo FGTS e autorize:<br>
+      Acesse o seu aplicativo oficial FGTS ou Caixa e autorize as instituições financeiras abaixo para antecipar seu Saque Aniversário:<br><br>
       <strong>1:</strong> J17 Sociedade de Crédito<br>
-      <strong>2:</strong> Giro Sociedade de Crédito
+      <strong>2:</strong> Giro Sociedade de Crédito<br><br>
+      Após autorizar, volte aqui para continuar com o processo.
     </div>
 
     <div class="grid">
-      <a href="https://forms.gle/7Bs2DYANFbMaASEe9" class="card"><i class="fas fa-hand-holding-usd"></i><span>Saque FGTS</span></a>
-      <a href="https://forms.gle/4VguNYKX4KfBzVJN7" class="card"><i class="fas fa-university"></i><span>Saque INSS</span></a>
-      <a href="https://forms.gle/12yJmH5xCsZ9c2398" class="card"><i class="fas fa-credit-card"></i><span>Cartão Crédito</span></a>
-      <a href="https://www.saqueaqui.online/autoriza%C3%A7%C3%A3o-de-institui%C3%A7%C3%B5es-saque-fgts" class="card"><i class="fas fa-video"></i><span>Vídeo Autorização</span></a>
-      <a href="https://forms.gle/ZR54WYRQWpCkDo7t8" class="card"><i class="fas fa-users"></i><span>Bolsa Família</span></a>
-      <a href="https://api.whatsapp.com/send?text=Confira%20o%20app%20Saque%20Aqui!%20Rápido%20e%20fácil%20para%20adiantar%20seu%20FGTS.%20Baixe%20aqui:%20https://play.google.com/store/apps/details?id=com.sistema.br" class="card compartilhar-mobile" target="_blank"><i class="fas fa-share-alt"></i><span>Compartilhar App</span></a>
+      <a href="https://forms.gle/7Bs2DYANFbMaASEe9" class="card">
+        <i class="fas fa-money-bill-wave"></i>
+        <span>Antecipe o Saque Aniversário Aqui</span>
+      </a>
+      <a href="https://www.saqueaqui.online/antecipa%C3%A7%C3%A3o-saque-aniversario-fgts-saque-aqui" class="card">
+        <i class="fas fa-play-circle"></i>
+        <span>Vídeo de Como Optar na Modalidade Aniversário</span>
+      </a>
+      <a href="https://www.saqueaqui.online/sobre-n%C3%B3s-fgts" class="card">
+        <i class="fas fa-info-circle"></i>
+        <span>Sobre Nós</span>
+      </a>
+      <a href="https://www.saqueaqui.online/autoriza%C3%A7%C3%A3o-de-institui%C3%A7%C3%B5es-saque-fgts" class="card">
+        <i class="fas fa-video"></i>
+        <span>Vídeo Autorização</span>
+      </a>
+      <a href="https://www.saqueaqui.online/politica-de-privacidade-saque-fgts" class="card">
+        <i class="fas fa-user-shield"></i>
+        <span>Política de Privacidade</span>
+      </a>
+      <a href="https://api.whatsapp.com/send?text=Confira%20o%20app%20Saque%20Aqui!%20Rápido%20e%20fácil%20para%20adiantar%20seu%20FGTS.%20Baixe%20aqui:%20https://play.google.com/store/apps/details?id=com.sistema.br" class="card compartilhar-mobile" target="_blank">
+        <i class="fas fa-share-alt"></i>
+        <span>Compartilhar App</span>
+      </a>
     </div>
 
     <div class="assistente-btn" onclick="abrirAssistente()">Assistente Virtual</div>
   </div>
 
-  <!-- Menu Inferior -->
   <div class="menu-inferior">
     <div onclick="location.reload()"><i class="fas fa-home"></i><div>Início</div></div>
-    <div onclick="window.open('https://www.saqueaqui.online/antecipa%C3%A7%C3%A3o-saque-aniversario-fgts-saque-aqui', '_blank')"><i class="fas fa-calendar"></i><div>Optar</div></div>
+    <div onclick="window.open('https://www.saqueaqui.online/termos-de-uso-fgts', '_blank')"><i class="fas fa-calendar"></i><div>Termos de Uso</div></div>
     <div onclick="window.location.href='mailto:fgtsonline.gov@gmail.com'"><i class="fas fa-headset"></i><div>Suporte</div></div>
     <div onclick="window.open('https://www.saqueaqui.online/saque-aniversario-do-fgts-saque-aqui', '_blank')"><i class="fas fa-globe"></i><div>Site</div></div>
   </div>
 
   <script>
     function abrirAssistente() {
-      alert("Para realizar seu saque:\n1. Autorize no app FGTS\n2. Autorize instituições J17 e Giro\n3. Clique em Saque FGTS.");
+      alert("Para continuar:\n1. Acesse o seu aplicativo oficial FGTS ou Caixa;\n2. Autorize as instituições J17 Sociedade de Crédito e Giro Sociedade de Crédito;\n3. Após autorizar, volte aqui para dar continuidade ao processo.");
     }
 
     function aceitarPolitica() {
@@ -382,7 +391,6 @@
     }
 
     window.onload = () => {
-      // Ocultar o loader após o carregamento
       document.getElementById('loader').style.display = 'none';
 
       const politicaAceita = localStorage.getItem('politicaAceita');
@@ -396,6 +404,5 @@
       animarCarrossel();
     };
   </script>
-
 </body>
-</html>
+      </html>
